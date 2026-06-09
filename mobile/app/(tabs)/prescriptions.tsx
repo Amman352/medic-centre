@@ -35,8 +35,7 @@ export default function PrescriptionsScreen() {
           setError('User session not found.');
           return;
         }
-        const { data, error: apiError } = await prescriptionService.getPatientPrescriptions(session.user.id);
-        if (apiError) throw apiError;
+        const data = await prescriptionService.getPatientPrescriptions(session.user.id);
         setPrescriptions(data || []);
       } catch (err: any) {
         setError(err.message || 'Failed to fetch prescriptions.');
