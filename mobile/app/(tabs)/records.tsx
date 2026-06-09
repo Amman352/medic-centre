@@ -36,9 +36,8 @@ export default function RecordsScreen() {
           setError('User session not found.');
           return;
         }
-        const { data, error: apiError } = await recordsService.getPatientRecords(session.user.id);
-        if (apiError) throw apiError;
-        setRecords(data || []);
+        const data = await recordsService.getPatientRecords(session.user.id);
+setRecords(data || []);
       } catch (err: any) {
         setError(err.message || 'Failed to fetch medical records.');
       } finally {

@@ -37,9 +37,8 @@ export default function AppointmentsScreen() {
           setError('User session not found.');
           return;
         }
-        const { data, error: apiError } = await appointmentService.getPatientAppointments(session.user.id);
-        if (apiError) throw apiError;
-        setAppointments(data || []);
+        const data = await appointmentService.getPatientAppointments(session.user.id);
+setAppointments(data || []);
       } catch (err: any) {
         setError(err.message || 'Failed to fetch appointments.');
       } finally {
