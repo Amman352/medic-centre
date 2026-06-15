@@ -1,44 +1,24 @@
-import { useEffect, useState } from 'react'
-import { Stack, router } from 'expo-router'
-import { supabase } from '../lib/supabase'
-import { Session } from '@supabase/supabase-js'
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
 
-export default function RootLayout() {
-  const [session, setSession] = useState<Session | null>(null)
-  const [loading, setLoading] = useState(true)
+const inter = Inter({ subsets: ['latin'] });
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-      setLoading(false)
-    })
+export const metadata: Metadata = {
+  title: 'Medic Centre - Doctor Dashboard',
+  description: 'Unified clinical workspace and patient health management ecosystem.',
+};
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setSession(session)
-        if (!session) {
-          router.replace('/(auth)/login')
-        }
-      }
-    )
-
-    return () => subscription.unsubscribe()
-  }, [])
-
-  useEffect(() => {
-    if (!loading) {
-      if (session) {
-        router.replace('/(tabs)/dashboard')
-      } else {
-        router.replace('/(auth)/login')
-      }
-    }
-  }, [session, loading])
-
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="(auth)" />
-      <Stack.Screen name="(tabs)" />
-    </Stack>
-  )
+    <html lang="en" className="h-full">
+      <body className={`${inter.className} h-full antialiased text-slate-900 bg-slate-50 dark:bg-slate-950 dark:text-slate-50`}>
+        {children}
+      </body>
+    </html>
+  );
 }

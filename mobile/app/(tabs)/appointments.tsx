@@ -38,7 +38,8 @@ export default function AppointmentsScreen() {
           return;
         }
         const data = await appointmentService.getPatientAppointments(session.user.id);
-setAppointments(data || []);
+        if (apiError) throw apiError;
+        setAppointments(data || []);
       } catch (err: any) {
         setError(err.message || 'Failed to fetch appointments.');
       } finally {
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
   segmentText: { fontSize: FontSize.sm, fontWeight: '600' },
   listContent: { paddingHorizontal: Spacing.lg, paddingBottom: Spacing.xl, gap: Spacing.md },
   appointmentCard: { borderRadius: BorderRadius.md, borderWidth: 1, padding: Spacing.md },
-  cardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
+  cardHeader: { flexDirection: 'row', justifyBox: 'space-between', alignItems: 'flex-start' },
   doctorName: { fontSize: FontSize.md, fontWeight: '700', letterSpacing: -0.2 },
   specialtyText: { fontSize: FontSize.xs, fontWeight: '500', marginTop: 2 },
   statusBadge: { paddingHorizontal: 8, paddingVertical: 4, borderRadius: BorderRadius.sm },
