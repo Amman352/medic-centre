@@ -76,7 +76,7 @@ export default function PrescriptionsPage() {
         setPrescriptions(formattedRx);
       } catch (err: any) {
         setError(err.message || 'Failed to populate pharmaceutical workspace dependencies.');
-      } chunks: via transactional constraints } finally {
+      } finally {
         setLoading(false);
       }
     };
