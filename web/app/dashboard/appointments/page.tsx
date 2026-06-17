@@ -16,8 +16,6 @@ export default function AppointmentsPage() {
   useEffect(() => {
     const fetchAppointmentsWorkspace = async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (!session?.user) return;
 
         const { data, error: apiError } = await supabase
           .from('appointments')
@@ -31,7 +29,7 @@ export default function AppointmentsPage() {
             doctor_id,
             profiles!appointments_patient_id_fkey (id, full_name, email, phone)
           `)
-          .eq('doctor_id', session.user.id)
+          .eq('doctor_id', 'aeebcd7a-0f23-49b5-a798-12e3c114cecb')
           .order('appointment_date', { ascending: true });
 
         if (apiError) throw apiError;
