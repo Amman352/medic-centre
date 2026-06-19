@@ -1,33 +1,30 @@
-```
-███████╗███████╗███╗   ██╗████████╗██╗███╗   ██╗███████╗██╗     ███╗   ██╗ ██████╗ ██████╗ ███████╗
-██╔════╝██╔════╝████╗  ██║╚══██╔══╝██║████╗  ██║██╔════╝██║     ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
-███████╗█████╗  ██╔██╗ ██║   ██║   ██║██╔██╗ ██║█████╗  ██║     ██╔██╗ ██║██║   ██║██║  ██║█████╗  
-╚════██║██╔══╝  ██║╚██╗██║   ██║   ██║██║╚██╗██║██╔══╝  ██║     ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
-███████║███████╗██║ ╚████║   ██║   ██║██║ ╚████║███████╗███████╗██║ ╚████║╚██████╔╝██████╔╝███████╗
-╚══════╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝╚═╝  ╚═══╝╚══════╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝
-```
+███╗   ███╗███████╗██████╗ ██╗ ██████╗     ██████╗███████╗███╗   ██╗████████╗██████╗ ███████╗
+████╗ ████║██╔════╝██╔══██╗██║██╔════╝    ██╔════╝██╔════╝████╗  ██║╚══██╔══╝██╔══██╗██╔════╝
+██╔████╔██║█████╗  ██║  ██║██║██║         ██║     █████╗  ██╔██╗ ██║   ██║   ██████╔╝█████╗  
+██║╚██╔╝██║██╔══╝  ██║  ██║██║██║         ██║     ██╔══╝  ██║╚██╗██║   ██║   ██╔══██╗██╔══╝  
+██║ ╚═╝ ██║███████╗██████╔╝██║╚██████╗    ╚██████╗███████╗██║ ╚████║   ██║   ██║  ██║███████╗
+╚═╝     ╚═╝╚══════╝╚═════╝ ╚═╝ ╚═════╝     ╚═════╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚══════╝
 
-**ML-Powered Adaptive IAM & Threat Orchestrator**
+Two-Sided Healthcare Scheduling & Records Platform
 
-> An AI-powered security platform that monitors user login behaviour, detects anomalies using Isolation Forest ML, and automatically responds to cyber threats in real time — no human intervention required.
+A full-stack healthcare platform connecting patients and doctors — a React Native mobile app for patients and a Next.js web dashboard for doctors, both backed by a single Supabase database with row-level security.
 
-![Python](https://img.shields.io/badge/Python-3.9-blue?style=flat-square&logo=python)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.128-green?style=flat-square&logo=fastapi)
-![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)
-![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=flat-square&logo=supabase)
-![Scikit-learn](https://img.shields.io/badge/scikit--learn-Isolation_Forest-orange?style=flat-square&logo=scikit-learn)
-![Clerk](https://img.shields.io/badge/Clerk-Auth-purple?style=flat-square)
+`React Native` `Expo` `Next.js` `TypeScript` `Supabase` `Tailwind CSS`
 
 ---
 
-## 📌 What is SentinelNode?
+## 📌 What is Medic Centre?
 
-SentinelNode is a real-time, AI-powered Identity Access Management (IAM) security system that watches every user login, scores it for risk using a machine learning model, and automatically takes action — blocking accounts, raising alerts, and logging everything — without any manual work.
+Medic Centre is a real-time healthcare coordination platform split across two purpose-built apps that share one backend:
 
-Unlike rule-based systems that only catch known attack patterns, SentinelNode uses **unsupervised anomaly detection** — it learns what normal looks like for your users and flags anything that deviates, including zero-day credential attacks it has never seen before.
+- **Patients** book appointments, upload medical records, and track prescriptions from their phone.
+- **Doctors** manage their patient roster, process appointment requests, and issue digital prescriptions from a web dashboard.
+
+Both apps read and write to the same Supabase PostgreSQL database. There's no sync layer, no polling, no duplicated state — a doctor approving an appointment in the web dashboard is visible to the patient in the mobile app on their next fetch, because both are querying the same source of truth.
 
 ```
-User logs in  →  Clerk webhook  →  Feature extraction  →  Isolation Forest  →  Risk score  →  SOAR action  →  Dashboard
+Patient books appt  →  Supabase insert  →  Doctor sees it in dashboard  →  Doctor approves
+       →  Supabase update  →  Patient sees "confirmed" status in mobile app
 ```
 
 ---
@@ -35,15 +32,15 @@ User logs in  →  Clerk webhook  →  Feature extraction  →  Isolation Forest
 ## ✨ Key Features
 
 | # | Feature | Description |
-|---|---------|-------------|
-| 01 | 🔐 Clerk Authentication | Managed login, signup, and session handling — no password code written |
-| 02 | 📡 Real-time Webhook Pipeline | Every login fires a Clerk webhook → backend → ML → SOAR in milliseconds |
-| 03 | 🧠 Isolation Forest ML | Unsupervised anomaly detection — no labelled attack data required |
-| 04 | ⚡ 3-Tier Risk Scoring | NORMAL (< 0.5) · ALERT (0.5–0.89) · BLOCK (≥ 0.9) |
-| 05 | 🤖 SOAR Engine | Auto-disables Clerk accounts and creates alerts when score ≥ 0.9 |
-| 06 | 🗄️ Supabase Database | PostgreSQL with RLS — stores users, login logs, and alerts persistently |
-| 07 | 📊 CrowdStrike-style Dashboard | Live charts, ML threshold tester, score distribution donuts, detections table |
-| 08 | 🧪 Attack Simulator | Simulate normal / suspicious / brute force logins directly from the UI |
+|---|---|---|
+| 01 | 🔐 Supabase Auth | Email/password authentication with persistent sessions on mobile |
+| 02 | 📅 Appointment Booking | Patients book, doctors approve/complete/cancel — full status lifecycle |
+| 03 | 📋 Medical Records | Patients upload documents to Supabase Storage, viewable anytime |
+| 04 | 💊 Prescription Engine | Doctors issue prescriptions with dynamic, multi-line medication entries |
+| 05 | 🩺 Doctor Dashboard | Live patient count, appointment stats, and prescription totals at a glance |
+| 06 | 🗄️ Shared Supabase Backend | One PostgreSQL database, one schema, two clients — no sync logic needed |
+| 07 | 🛡️ Row-Level Security | Postgres RLS policies scope data access between patients and doctors |
+| 08 | 🎨 Dark Clinical UI | Slate/dark theme on web, clean native UI on mobile, both Tailwind-driven |
 
 ---
 
@@ -51,216 +48,156 @@ User logs in  →  Clerk webhook  →  Feature extraction  →  Isolation Forest
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        USER LOGIN (Clerk)                       │
-│              Email / password verified by Clerk                 │
-└──────────────────────────────┬──────────────────────────────────┘
-                               │  session.created webhook
-                               ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    NGROK TUNNEL (dev only)                      │
-│         Exposes localhost:8001 to Clerk's servers               │
-└──────────────────────────────┬──────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                   FASTAPI BACKEND  :8001                        │
-│   POST /api/ingest-log                                          │
-│   · Resolve or create user in Supabase                         │
-│   · Compute 5 ML features from login history                   │
-│   · Insert login_log row (risk_score = null)                   │
-└──────────────┬──────────────────────────────────────────────────┘
-               │  POST /predict
-               ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                   FASTAPI ML SERVICE  :8000                     │
-│   · Isolation Forest loaded from model.pkl                     │
-│   · Scores 5 features → risk_score 0.0–1.0                    │
-│   · Returns { risk_score, verdict, action }                    │
-└──────────────┬──────────────────────────────────────────────────┘
-               │  risk_score returned
-               ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                      SOAR ENGINE  (soar.py)                     │
-│   score < 0.5   → log only, no action                          │
-│   score 0.5–0.89 → insert alert row (alert_only)              │
-│   score ≥ 0.9   → Clerk API ban + insert alert row            │
-└──────────────┬──────────────────────────────────────────────────┘
-               │
-               ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                     SUPABASE (PostgreSQL)                       │
-│   login_logs  ·  alerts  ·  users                              │
-└──────────────┬──────────────────────────────────────────────────┘
-               │  GET /api/logs · GET /api/alerts
-               ▼
-┌─────────────────────────────────────────────────────────────────┐
-│               NEXT.JS DASHBOARD  :3000                          │
-│   Activity dashboard · Detections · SOAR engine                │
-│   ML insights · Settings · Threshold tester                    │
-└─────────────────────────────────────────────────────────────────┘
+│                          SUPABASE                                │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │                    PostgreSQL Database                     │   │
+│  │   profiles · appointments · medical_records ·              │   │
+│  │   prescriptions · medications · medication_reminders        │   │
+│  └──────────────────────────────────────────────────────────┘   │
+│  ┌──────────────────────┐      ┌────────────────────────────┐   │
+│  │   Auth (JWT sessions)  │      │  Storage (medical-records)  │   │
+│  └──────────────────────┘      └────────────────────────────┘   │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │              Row-Level Security Policies                    │   │
+│  │   patients see only their own data · doctors see only        │   │
+│  │   appointments/prescriptions they created                      │   │
+│  └──────────────────────────────────────────────────────────┘   │
+└───────────────────────────────┬───────────────────────────────────┘
+                                 │
+              ┌──────────────────┴───────────────────┐
+              │                                       │
+   ┌──────────▼───────────┐               ┌──────────▼────────────┐
+   │     MOBILE APP          │               │     WEB DASHBOARD       │
+   │  React Native + Expo     │               │      Next.js 16          │
+   │                            │               │                            │
+   │  Patient-facing:            │               │  Doctor-facing:            │
+   │  • Login / Register           │               │  • Dashboard (live stats)   │
+   │  • Book appointments            │               │  • Patient registry           │
+   │  • View medical records           │               │  • Appointments manager         │
+   │  • Track prescriptions              │               │  • Prescription issuer            │
+   │  • Profile management                 │               │  • Sidebar nav (dark theme)          │
+   └────────────────────────┘               └─────────────────────────┘
 ```
 
 ---
 
-## 🧠 ML Model — Isolation Forest
+## 🗄️ Database Design — Why This Schema
 
-### Why Isolation Forest?
+Healthcare data has a natural shape: one person can be a patient, a doctor, or both — and every clinical record (appointment, prescription, note) needs to point at exactly two people: who it's for, and who's responsible for it.
 
-Traditional fraud detection requires **labelled attack data** — thousands of examples of "this is an attack." That data is almost impossible to get for a new system with no history.
+**Design decisions:**
 
-Isolation Forest solves this by being **fully unsupervised**. It never sees attack examples. Instead:
+- **`profiles` extends `auth.users`** rather than duplicating auth logic — Supabase Auth handles credentials, `profiles` just adds a `role` column and contact info.
+- **`appointments` and `prescriptions` both store `patient_id` + `doctor_id`** as separate foreign keys, not a single `participants` array — this keeps RLS policies simple (`WHERE doctor_id = auth.uid()`) instead of needing array containment checks.
+- **`medications` is a child table of `prescriptions`**, not a JSON column — a doctor can prescribe 1 to N drugs per visit, and a relational table lets the web dashboard render/edit each line item independently.
+- **`medical_records` stores file references, not files** — actual documents live in Supabase Storage; the table just tracks metadata and ownership.
 
-1. It learns the shape of **normal login behaviour** from training data
-2. It scores new logins by how different they are from that normal cluster
-3. Anomalies are **isolated quickly** (few random cuts needed)
-4. Normal points are **deep in the cluster** (many cuts needed to isolate)
+### The 5 Core Tables
 
-This means SentinelNode detects attacks it has **never seen before**, including zero-day credential stuffing and novel brute force patterns.
+| Table | Purpose | Key Relationships |
+|---|---|---|
+| `profiles` | Extends auth users with role, name, contact info | `role` ∈ {`patient`, `doctor`} |
+| `appointments` | Booking record between one patient and one doctor | `patient_id`, `doctor_id` → `profiles.id` |
+| `medical_records` | Patient-uploaded documents | `patient_id` → `profiles.id`, file in Storage |
+| `prescriptions` | Diagnosis + notes + validity window | `patient_id`, `doctor_id` → `profiles.id` |
+| `medications` | Line items within a prescription | `prescription_id` → `prescriptions.id` |
 
-### Dataset — How Training Data Was Built
-
-**No external dataset was used.** The training data was generated synthetically to represent normal user behaviour, then improved with real login events as they accumulate.
-
-**Phase 1 — Synthetic bootstrapping (600 samples)**
-
-```python
-# ml-service/models.py — _generate_normal_data()
-np.column_stack([
-    np.random.randint(8, 21, n),  # login_hour: 8am–9pm (business hours)
-    np.zeros(n),                   # ip_changed: 0 — same IP = normal
-    np.ones(n),                    # attempts: 1 — single attempt = normal
-    np.zeros(n),                   # location_changed: 0 — same city
-    np.zeros(n),                   # new_device: 0 — known device
-])
-```
-
-A normal user logs in during business hours, from the same IP they always use, on a device you've seen before, with one attempt. This cluster defines "normal."
-
-**Phase 2 — Real data retraining**
-
-As real logins accumulate in Supabase's `login_logs` table, `retrain_from_logs()` can be called to replace synthetic data with real user patterns, significantly reducing false positives.
-
-### The 5 Features
-
-| Feature | Type | Normal | Suspicious |
-|---------|------|--------|------------|
-| `login_hour` | int 0–23 | 8–20 (business hours) | 0–5 (off-hours) |
-| `ip_changed` | 0 or 1 | 0 — same IP as history | 1 — new IP address |
-| `attempts_last_hour` | int | 1–2 attempts | 10+ attempts |
-| `location_changed` | 0 or 1 | 0 — same city | 1 — different country |
-| `new_device` | 0 or 1 | 0 — known browser/OS | 1 — unseen device |
-
-### Risk Score Thresholds
-
-| Score Range | Verdict | SOAR Action |
-|-------------|---------|-------------|
-| 0.00 – 0.49 | 🟢 NORMAL | Log only — no action |
-| 0.50 – 0.89 | 🟡 ALERT | Insert alert row — human reviews |
-| 0.90 – 1.00 | 🔴 BLOCK | Disable Clerk account + insert alert |
-
-### Model Parameters
-
-```python
-IsolationForest(
-    contamination=0.05,   # expect 5% of logins to be anomalies
-    random_state=42       # reproducible results across restarts
-)
-```
-
-`contamination=0.05` controls aggression — lower means more false alarms, higher means more missed attacks. Tunable based on your false positive rate.
+Full schema: [`docs/schema.sql`](./docs/schema.sql)
 
 ---
 
-## 📊 Dashboard Pages
+## 📊 App Screens
 
-| Page | What it shows |
-|------|---------------|
-| **Activity dashboard** | SentinelScore, 4 stat cards with sparklines, risk bar chart, score distribution donuts, ML threshold tester with live sliders, active alerts panel, simulate buttons, detections table |
-| **Detections** | All login events with filter tabs (All / High / Medium / Normal), full feature columns including ip_changed and new_device |
-| **SOAR engine** | 4 execution stats, workflow rules table, all alert executions with action taken and resolved status |
-| **ML insights** | Model configuration, feature importance bars, riskiest login hours chart from real data |
-| **Settings** | All service URLs, startup commands for every service |
+| Surface | Screens |
+|---|---|
+| **Mobile** | Login · Register · Dashboard · Appointments · Medical Records · Prescriptions · Profile |
+| **Web** | Dashboard (stats) · Patient Registry · Appointments Manager · Prescription Issuer |
+
+---
+
+## 📸 Screenshots
+
+> _Add screenshots here — see `/screenshots` folder_
+
+| Mobile: Dashboard | Mobile: Appointments | Web: Doctor Dashboard |
+|---|---|---|
+| ![mobile-dashboard](./screenshots/mobile-dashboard.png) | ![mobile-appointments](./screenshots/mobile-appointments.png) | ![web-dashboard](./screenshots/web-dashboard.png) |
 
 ---
 
 ## ⚙️ Tech Stack
 
-### Frontend
-| Technology | Purpose |
-|-----------|---------|
-| Next.js 16 (React) | Dashboard UI, App Router, client-side polling |
-| TypeScript | Type safety for API responses and component props |
-| Inline SVG | Custom sparklines, bar charts, donut charts — zero dependencies |
+### Mobile App
 
-### Authentication
 | Technology | Purpose |
-|-----------|---------|
-| Clerk | Login, signup, session management, webhook events |
-| Clerk REST API | `POST /v1/users/{id}/ban` — SOAR auto-disable |
+|---|---|
+| React Native | Cross-platform mobile UI |
+| Expo | Build tooling, dev client, OTA-ready |
+| Expo Router | File-based navigation (`app/` directory) |
+| TypeScript | Type safety across services and screens |
+
+### Web Dashboard
+
+| Technology | Purpose |
+|---|---|
+| Next.js 16 (App Router) | Server + client components, file-based routing |
+| TypeScript | Shared types between pages and Supabase queries |
+| Tailwind CSS | Utility-first styling, dark/slate clinical theme |
+| shadcn/ui | Accessible base components (button, table, dialog) |
 
 ### Backend
-| Technology | Purpose |
-|-----------|---------|
-| FastAPI | Two services — ml-service (:8000) and backend (:8001) |
-| Pydantic | Automatic request validation with typed schemas |
-| httpx | Async HTTP client for backend → ML service calls |
-| python-dotenv | Load `.env` secrets without hardcoding |
-| uvicorn | ASGI server to run FastAPI |
-| svix | Clerk webhook signature verification |
 
-### ML / Data Science
 | Technology | Purpose |
-|-----------|---------|
-| scikit-learn | `IsolationForest` — core anomaly detection algorithm |
-| numpy | Feature vector array operations |
-| joblib | Serialize trained model to `model.pkl` for persistence |
-
-### Database
-| Technology | Purpose |
-|-----------|---------|
-| Supabase (PostgreSQL) | Three tables: `users`, `login_logs`, `alerts` |
-| Row Level Security | Anon key filtered by RLS policies |
-| Supabase Python client | Backend reads/writes via service role key |
+|---|---|
+| Supabase (PostgreSQL) | Single source of truth for both apps |
+| Supabase Auth | Email/password sessions, JWT-based |
+| Supabase Storage | Medical record file uploads |
+| Row Level Security | Postgres policies scoping patient/doctor data access |
+| `@supabase/supabase-js` | Mobile client |
+| `@supabase/ssr` | Web client (browser + server compatible) |
 
 ### Infrastructure
+
 | Technology | Purpose |
-|-----------|---------|
-| ngrok | Dev tunnel — exposes :8001 to Clerk's webhook server |
-| GitHub | Version control — 11 commits, clean history |
+|---|---|
+| Vercel | Web dashboard deployment |
+| Expo Go / EAS | Mobile app testing and builds |
+| GitHub | Version control |
 
 ---
 
 ## 📁 Project Structure
 
 ```
-sentinelnode/
+medic-centre/
 │
-├── frontend/                          ← Next.js dashboard
+├── mobile/                        ← React Native Expo app (patient-facing)
 │   ├── app/
-│   │   ├── page.tsx                   ← Full dashboard (5 pages in one file)
-│   │   ├── layout.tsx
-│   │   └── globals.css
-│   ├── .env.local                     ← Supabase anon key (gitignored)
-│   └── package.json
+│   │   ├── (auth)/                 ← login.tsx, register.tsx
+│   │   ├── (tabs)/                 ← dashboard, appointments, records, prescriptions, profile
+│   │   └── _layout.tsx             ← root layout, session handling
+│   ├── services/                   ← auth.ts, appointments.ts, records.ts, prescriptions.ts
+│   ├── lib/supabase.ts             ← Supabase client config
+│   ├── constants/theme.ts          ← Colors, spacing, typography
+│   ├── types/index.ts              ← Shared TypeScript types
+│   └── .env.local                  ← Supabase keys (gitignored)
 │
-├── backend/                           ← FastAPI SOAR engine
-│   ├── main.py                        ← POST /api/ingest-log, GET /api/logs, GET /api/alerts
-│   ├── database.py                    ← Supabase client + helper functions
-│   ├── soar.py                        ← Risk threshold → automated action
-│   ├── requirements.txt
-│   ├── .env                           ← Supabase + Clerk keys (gitignored)
-│   └── venv/                          ← Python 3.9 virtual environment (gitignored)
+├── web/                            ← Next.js app (doctor-facing dashboard)
+│   ├── app/
+│   │   └── dashboard/
+│   │       ├── page.tsx             ← stats overview
+│   │       ├── patients/page.tsx     ← patient registry
+│   │       ├── appointments/page.tsx  ← appointments manager
+│   │       └── prescriptions/page.tsx  ← prescription issuer
+│   ├── components/
+│   │   ├── Sidebar.tsx               ← nav with active-state highlighting
+│   │   └── ui/                        ← shadcn/ui components
+│   ├── lib/supabase.ts                ← createClient() — @supabase/ssr
+│   ├── types/index.ts                 ← Shared TypeScript types
+│   └── .env.local                     ← Supabase keys (gitignored)
 │
-├── ml-service/                        ← FastAPI ML prediction service
-│   ├── main.py                        ← POST /predict, GET /health
-│   ├── models.py                      ← IsolationForest train / load / score
-│   ├── model.pkl                      ← Trained model file (gitignored)
-│   ├── requirements.txt
-│   └── venv/                          ← Python 3.9 virtual environment (gitignored)
-│
-├── docs/                              ← Architecture diagrams
-├── scripts/                           ← Utility scripts
-├── .gitignore                         ← venv, .env, node_modules, model.pkl excluded
+├── docs/                            ← schema.sql, architecture notes
+├── screenshots/                      ← App screenshots for this README
 └── README.md
 ```
 
@@ -269,42 +206,62 @@ sentinelnode/
 ## 🗄️ Database Schema
 
 ```sql
--- Users — mirrors Clerk users into your own DB
-CREATE TABLE users (
-  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  clerk_user_id TEXT UNIQUE NOT NULL,
-  email         TEXT NOT NULL,
-  created_at    TIMESTAMPTZ DEFAULT now(),
-  is_banned     BOOLEAN DEFAULT false
-);
-
--- Login logs — one row per login attempt, forever
-CREATE TABLE login_logs (
-  id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id             UUID REFERENCES users(id) ON DELETE CASCADE,
-  ip_address          TEXT,
-  device              TEXT,
-  location            TEXT,
-  login_hour          INT,
-  ip_changed          BOOLEAN DEFAULT false,
-  location_changed    BOOLEAN DEFAULT false,
-  new_device          BOOLEAN DEFAULT false,
-  attempts_last_hour  INT DEFAULT 1,
-  risk_score          FLOAT,              -- null until ML responds
-  timestamp           TIMESTAMPTZ DEFAULT now()
-);
-
--- Alerts — only written when score >= 0.5
-CREATE TABLE alerts (
-  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id       UUID REFERENCES users(id) ON DELETE CASCADE,
-  risk_score    FLOAT NOT NULL,
-  reason        TEXT,
-  action_taken  TEXT,                     -- "alert_only" or "user_disabled"
-  resolved      BOOLEAN DEFAULT false,
+-- profiles — extends Supabase auth users
+CREATE TABLE profiles (
+  id            UUID PRIMARY KEY REFERENCES auth.users(id),
+  full_name     TEXT,
+  email         TEXT,
+  phone         TEXT,
+  role          TEXT NOT NULL CHECK (role IN ('patient', 'doctor')),
+  date_of_birth DATE,
   created_at    TIMESTAMPTZ DEFAULT now()
 );
+
+-- appointments — one booking between one patient and one doctor
+CREATE TABLE appointments (
+  id                 UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  patient_id         UUID REFERENCES profiles(id),
+  doctor_id          UUID REFERENCES profiles(id),
+  appointment_date   DATE NOT NULL,
+  appointment_time   TIME NOT NULL,
+  status             TEXT DEFAULT 'pending', -- pending | confirmed | completed | cancelled
+  notes              TEXT,
+  created_at         TIMESTAMPTZ DEFAULT now()
+);
+
+-- prescriptions — diagnosis + validity window
+CREATE TABLE prescriptions (
+  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  patient_id    UUID REFERENCES profiles(id),
+  doctor_id     UUID REFERENCES profiles(id),
+  diagnosis     TEXT NOT NULL,
+  notes         TEXT,
+  issued_date   DATE DEFAULT CURRENT_DATE,
+  valid_until   DATE NOT NULL
+);
+
+-- medications — line items within a prescription
+CREATE TABLE medications (
+  id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  prescription_id  UUID REFERENCES prescriptions(id) ON DELETE CASCADE,
+  name             TEXT NOT NULL,
+  dosage           TEXT,
+  frequency        TEXT,
+  duration         TEXT,
+  instructions     TEXT
+);
+
+-- medical_records — patient-uploaded documents
+CREATE TABLE medical_records (
+  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  patient_id    UUID REFERENCES profiles(id),
+  file_url      TEXT NOT NULL,
+  file_name     TEXT,
+  uploaded_at   TIMESTAMPTZ DEFAULT now()
+);
 ```
+
+Full schema with RLS policies: [`docs/schema.sql`](./docs/schema.sql)
 
 ---
 
@@ -312,177 +269,104 @@ CREATE TABLE alerts (
 
 ### Prerequisites
 
-- Python 3.9 (system Python, not Anaconda)
 - Node.js 18+
-- A Supabase account (free tier works)
-- A Clerk account (free tier works)
-- ngrok account (free tier works)
+- A free [Supabase](https://supabase.com) account
+- [Expo Go](https://expo.dev/go) app (for mobile testing)
 
 ### Step 1 — Clone the repo
 
 ```bash
-git clone https://github.com/Amman352/Sentinel-Node.git
-cd Sentinel-Node
+git clone https://github.com/Amman352/medic-centre.git
+cd medic-centre
 ```
 
-### Step 2 — Set up ML service
+### Step 2 — Set up the database
 
-```bash
-cd ml-service
-/usr/bin/python3 -m venv venv
-source venv/bin/activate
-pip install fastapi uvicorn scikit-learn numpy joblib
-pip freeze > requirements.txt
+Go to Supabase → SQL Editor → paste and run the full schema from [`docs/schema.sql`](./docs/schema.sql).
+
+### Step 3 — Configure mobile environment
+
+Create `mobile/.env.local`:
+
+```
+EXPO_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+EXPO_PUBLIC_SUPABASE_ANON_KEY=eyJhbGc...your-anon-key...
 ```
 
-### Step 3 — Set up Backend
+### Step 4 — Configure web environment
 
-```bash
-cd ../backend
-/usr/bin/python3 -m venv venv
-source venv/bin/activate
-pip install fastapi uvicorn supabase python-dotenv httpx svix
+Create `web/.env.local`:
+
 ```
-
-Create `backend/.env`:
-
-```env
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_SERVICE_KEY=eyJhbGc...your-service-role-key...
-ML_SERVICE_URL=http://localhost:8000
-CLERK_SECRET_KEY=sk_test_...
-CLERK_WEBHOOK_SECRET=whsec_...
-```
-
-### Step 4 — Set up Frontend
-
-```bash
-cd ../frontend
-npm install
-npm install @supabase/supabase-js
-```
-
-Create `frontend/.env.local`:
-
-```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGc...your-anon-key...
-NEXT_PUBLIC_BACKEND_URL=http://localhost:8001
 ```
 
-### Step 5 — Create Supabase tables
+### Step 5 — Run everything
 
-Go to Supabase → SQL Editor → paste and run the full schema from the Database Schema section above.
-
-### Step 6 — Run everything
-
-Open 4 terminals:
+Open two terminals:
 
 ```bash
-# Terminal 1 — ML service
-cd ml-service && source venv/bin/activate
-uvicorn main:app --reload --port 8000
-
-# Terminal 2 — Backend
-cd backend && source venv/bin/activate
-uvicorn main:app --reload --port 8001
-
-# Terminal 3 — Frontend
-cd frontend && npm run dev
-
-# Terminal 4 — ngrok (for Clerk webhooks)
-ngrok http 8001 --region=in
+# Terminal 1 — Mobile app
+cd mobile
+npm install
+npx expo start
 ```
 
-Open **http://localhost:3000**
+```bash
+# Terminal 2 — Web dashboard
+cd web
+npm install
+npm run dev
+```
 
-### Step 7 — Connect Clerk webhook
-
-1. Go to Clerk dashboard → Configure → Webhooks → Add Endpoint
-2. URL: `https://your-ngrok-url.ngrok-free.app/api/ingest-log`
-3. Events: `session.created` + `user.created`
-4. Copy the signing secret → paste into `backend/.env` as `CLERK_WEBHOOK_SECRET`
+- Mobile: scan the QR code with Expo Go
+- Web: open [http://localhost:3000/dashboard](http://localhost:3000/dashboard)
 
 ---
 
-## 🧪 Testing the Pipeline
-
-**Test from the dashboard** — use the Simulate detections buttons on the Activity dashboard page.
-
-**Test from terminal:**
-
-```bash
-# Normal login — expect score ~0.08, verdict: normal
-curl -X POST http://localhost:8001/api/ingest-log \
-  -H "Content-Type: application/json" \
-  -d '{"type":"session.created","data":{"user_id":"user_test_normal"}}'
-
-# Brute force — same user, 6 rapid attempts — expect score rising to alert
-for i in 1 2 3 4 5 6; do
-  curl -s -X POST http://localhost:8001/api/ingest-log \
-    -H "Content-Type: application/json" \
-    -d '{"type":"session.created","data":{"user_id":"user_attacker"}}' &
-done
-
-# Test ML directly
-curl -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{"login_hour":3,"ip_changed":1,"attempts_last_hour":15,"location_changed":1,"new_device":1}'
-```
-
----
-
-## 🔍 Detection Logic
-
-### How the risk score is computed
-
-```python
-# ml-service/models.py — compute_risk_score()
-X = np.array([[login_hour, ip_changed, attempts_last_hour, location_changed, new_device]])
-raw = model.decision_function(X)[0]   # positive = normal, negative = anomaly
-score = (0.5 - raw)                    # flip and normalise to 0.0–1.0
-return round(max(0.0, min(1.0, score)), 2)
-```
-
-`decision_function()` returns how far a point is from the decision boundary:
-- **Positive** → inside the normal cluster → low risk score
-- **Negative** → outside the normal cluster → high risk score
-
-### SOAR tier actions
+## 🔍 How Doctor ↔ Patient Data Flow Works
 
 ```
-score < 0.5   →  log_only         →  no action, just stored in login_logs
-score 0.5–0.89 →  alert_only       →  INSERT into alerts, action_taken = "alert_only"
-score ≥ 0.9   →  user_disabled    →  POST Clerk ban API + INSERT into alerts
+1. Patient registers on mobile     →  profiles row created, role = 'patient'
+2. Patient books appointment        →  appointments row created, status = 'pending'
+3. Doctor opens web dashboard         →  queries appointments WHERE doctor_id = current doctor
+4. Doctor clicks "Approve"               →  UPDATE appointments SET status = 'confirmed'
+5. Patient refreshes mobile app             →  sees status: confirmed
+6. Doctor issues prescription                  →  prescriptions + medications rows created
+7. Patient views prescriptions screen             →  sees new prescription instantly
 ```
+
+No webhooks, no push notifications (yet) — both clients query Supabase directly, so data is consistent the moment either side refreshes.
 
 ---
 
 ## ⚠️ Known Limitations & Future Work
 
 | Limitation | Planned Fix |
-|-----------|-------------|
-| Cold start — first 200 logins use synthetic data | Automatic retraining cron job after 200+ real logins |
-| One global model for all users | Per-user Isolation Forest models (Phase 2) |
-| `location_changed` hardcoded to 0 | Integrate MaxMind GeoIP API |
-| ngrok required in development | Deploy backend to Render/Railway for permanent URL |
-| No email alerting | SendGrid integration when score ≥ 0.9 |
-| Cloudflare IP block pending | Configure Cloudflare Zone ID and API token |
+|---|---|
+| Web dashboard has no doctor login flow yet | Wire `web/app/page.tsx` to Supabase Auth + session-based routing |
+| No push notifications for appointment updates | Integrate Expo push notifications |
+| Doctor ID is hardcoded for portfolio demo | Replace with `auth.getSession()` once web auth is wired |
+| No real-time subscriptions | Add Supabase Realtime channels for live updates without refresh |
+| Not yet deployed | Vercel deployment for web, EAS build for mobile |
 
 ---
 
 ## 🎯 Use Cases
 
-- Small companies that can't afford enterprise SIEM tools
-- Developers who want ML-powered auth security without a security team
-- Cybersecurity students learning about SOAR, IAM, and anomaly detection
-- Capstone and final year projects demonstrating full-stack AI security
+- Developers building portfolio projects that demonstrate full-stack CRUD across two clients
+- Healthcare startups prototyping a patient/doctor coordination MVP
+- Students learning Supabase RLS, Expo Router, and Next.js App Router together in one project
 
 ---
 
 ## 👨‍💻 Author
 
 **Amman Khan**
-B.Tech CSE — Cyber Security
 
-> Built for educational and research purposes · SentinelNode AI
+[GitHub](https://github.com/Amman352) · [LinkedIn](#)
+
+---
+
+Built as a full-stack portfolio project · Medic Centre
