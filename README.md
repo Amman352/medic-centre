@@ -1,10 +1,3 @@
-███╗   ███╗███████╗██████╗ ██╗ ██████╗     ██████╗███████╗███╗   ██╗████████╗██████╗ ███████╗
-████╗ ████║██╔════╝██╔══██╗██║██╔════╝    ██╔════╝██╔════╝████╗  ██║╚══██╔══╝██╔══██╗██╔════╝
-██╔████╔██║█████╗  ██║  ██║██║██║         ██║     █████╗  ██╔██╗ ██║   ██║   ██████╔╝█████╗  
-██║╚██╔╝██║██╔══╝  ██║  ██║██║██║         ██║     ██╔══╝  ██║╚██╗██║   ██║   ██╔══██╗██╔══╝  
-██║ ╚═╝ ██║███████╗██████╔╝██║╚██████╗    ╚██████╗███████╗██║ ╚████║   ██║   ██║  ██║███████╗
-╚═╝     ╚═╝╚══════╝╚═════╝ ╚═╝ ╚═════╝     ╚═════╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚══════╝
-
 Two-Sided Healthcare Scheduling & Records Platform
 
 A full-stack healthcare platform connecting patients and doctors — a React Native mobile app for patients and a Next.js web dashboard for doctors, both backed by a single Supabase database with row-level security.
